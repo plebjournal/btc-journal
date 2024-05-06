@@ -1,0 +1,7 @@
+<tr id=<%= dom_id transaction %>>
+  <td><%= transaction.transaction_date.strftime('%Y-%m-%d:%H-%M') %></td>
+  <td><%= transaction.transaction_type %></td>
+  <td><%= transaction.btc %></td>
+  <td><%= transaction.fiat %></td>
+  <td><%= transaction.fiat_currency.code %></td>
+</tr>

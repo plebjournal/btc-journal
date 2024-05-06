@@ -1,0 +1,43 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Transactions</h1>
+
+<div id="transactions">
+  <table>
+    <thead>
+    <tr>
+      <td>Time</td>
+      <td>Type</td>
+      <td>BTC Amount</td>
+      <td>Fiat Amount</td>
+      <td>Fiat</td>
+    </tr>
+    </thead>
+    <tbody>
+    <% @transactions.each do |transaction| %>
+        <%= render partial: 'transaction_list_item', locals: { transaction: transaction } %>
+    <% end %>
+    </tbody>
+
+  </table>
+</div>
+
+<h2>Summary</h2>
+<div>
+  <table>
+    <thead>
+    <tr>
+      <td>Total BTC</td>
+      <td>Total Fiat</td>
+    </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= @summary.btc %></td>
+        <td><%= @summary.fiat %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<%= link_to "New transaction", new_transaction_path %>
