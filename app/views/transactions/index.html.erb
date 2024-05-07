@@ -27,14 +27,18 @@
   <table>
     <thead>
     <tr>
-      <td>Total BTC</td>
-      <td>Total Fiat</td>
+      <td>Total BTC </td>
+      <td>Total SATS</td>
+      <td>Total Fiat Spend</td>
+      <td>Current Value</td>
     </tr>
     </thead>
     <tbody>
       <tr>
         <td><%= @summary.btc %></td>
+        <td><%= @summary.sats %></td>
         <td><%= @summary.fiat %></td>
+        <td><%= (@summary.btc * @prices.first.price).round %></td>
       </tr>
     </tbody>
   </table>

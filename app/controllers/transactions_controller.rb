@@ -6,6 +6,7 @@ class TransactionsController < ApplicationController
   def index
     @transactions = current_user.transactions.includes(:fiat_currency).order(:transaction_date)
     @summary = UserTransactionsSummary.summarize(current_user)
+    @prices = CurrentPrice.includes(:fiat_currency).all
   end
 
   # GET /transactions/1 or /transactions/1.json

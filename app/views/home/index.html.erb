@@ -1,5 +1,14 @@
 <h1>Pleb Journal</h1>
 
+<h3>Current Bitcoin Price</h3>
+<div>
+<ul>
+  <% @prices.each do |price| %>
+    <li> <%=price.price.round(0) %> <%= price.fiat_currency.code %></li>
+  <% end %>
+</ul>
+</div>
+
 <div>
   <%= link_to 'Transactions', controller: 'transactions', path: 'index' %>
 </div>

@@ -25,8 +25,12 @@ module UserTransactionsSummary
       self
     end
 
-    def btc
+    def sats
       @total_btc
+    end
+
+    def btc
+      @total_btc.to_f / 100_000_000.to_f
     end
 
     def fiat

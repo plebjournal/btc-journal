@@ -2,5 +2,6 @@
 
 class HomeController < ApplicationController
   def index
+    @prices = CurrentPrice.includes(:fiat_currency).all
   end
 end
