@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_05_203053) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_07_031341) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -113,6 +113,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_203053) do
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
 
+  create_table "historical_prices", force: :cascade do |t|
+    t.datetime "date", null: false
+    t.decimal "price", null: false
+    t.bigint "fiat_currency_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fiat_currency_id", "date"], name: "index_historical_prices_on_fiat_currency_id_and_date", unique: true
+    t.index ["fiat_currency_id"], name: "index_historical_prices_on_fiat_currency_id"
+  end
+
   create_table "transactions", force: :cascade do |t|
     t.datetime "transaction_date", null: false
     t.bigint "btc", null: false
@@ -139,6 +149,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_05_203053) do
   end
 
   add_foreign_key "current_prices", "fiat_currencies"
+  add_foreign_key "historical_prices", "fiat_currencies"
   add_foreign_key "transactions", "fiat_currencies"
   add_foreign_key "transactions", "users"
 end
