@@ -1,7 +1,9 @@
-<tr id=<%= dom_id transaction %>>
-  <td><%= transaction.transaction_date.strftime('%Y-%m-%d:%H-%M') %></td>
-  <td><%= transaction.transaction_type %></td>
-  <td><%= transaction.btc %></td>
-  <td><%= transaction.fiat %></td>
-  <td><%= transaction.fiat_currency.code %></td>
+<tr id=<%= dom_id presenter.transaction %>>
+  <td><%= presenter.transaction.transaction_date.strftime('%Y-%m-%d:%H-%M') %></td>
+  <td><%= presenter.transaction.transaction_type %></td>
+  <td><%= presenter.transaction.as_btc %></td>
+  <td><%= presenter.transaction.fiat %></td>
+  <td><%= presenter.transaction.fiat_currency.code %></td>
+  <td><%= presenter.current_value.round %></td>
+  <td><%= presenter.ngu %></td>
 </tr>

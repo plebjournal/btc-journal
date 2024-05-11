@@ -12,4 +12,12 @@ class Transaction < ApplicationRecord
   def self.for_user(user)
     user.transactions.includes(:fiat_currency)
   end
+
+  def as_sats
+    btc
+  end
+
+  def as_btc
+    btc.to_f / 100_000_000.to_f
+  end
 end

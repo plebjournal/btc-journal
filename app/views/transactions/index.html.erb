@@ -11,17 +11,15 @@
       <td>BTC Amount</td>
       <td>Fiat Amount</td>
       <td>Fiat</td>
+      <td>Current Value</td>
+      <td>NGU</td>
     </tr>
     </thead>
     <tbody>
-    <% @transactions.each do |transaction| %>
-        <%= render partial: 'transaction_list_item', locals: { transaction: transaction } %>
-    <% end %>
-    <% @test.each do |t| %>
-      <div><%= t.date %></div>
+    <% @transactions.each do |presenter| %>
+        <%= render partial: 'transaction_list_item', locals: { presenter: presenter } %>
     <% end %>
     </tbody>
-
   </table>
 </div>
 
