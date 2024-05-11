@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
   # GET /transactions or /transactions.json
   def index
     @transactions = current_user.transactions.includes(:fiat_currency).order(:transaction_date)
-    @summary = UserTransactionsSummary.summarize(current_user)
+    @test = @transactions.map { |t| HistoricalPrice.for_transaction(t).first }.to_a
     @prices = CurrentPrice.includes(:fiat_currency).all
   end
 

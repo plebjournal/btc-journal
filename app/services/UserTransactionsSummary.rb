@@ -36,5 +36,10 @@ module UserTransactionsSummary
     def fiat
       @total_fiat
     end
+
+    def ngu
+      current_value = btc * CurrentPrice.first.price
+      current_value / @total_fiat
+    end
   end
 end

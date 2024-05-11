@@ -1,0 +1,50 @@
+<h1>Dashboard</h1>
+<div>
+  <table>
+    <thead>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Stack (BTC)</td>
+        <td> <%= @summary.btc %> </td>
+      </tr>
+      <tr>
+        <td>Stack (sats)</td>
+        <td> <%= @summary.sats %></td>
+      </tr>
+      <tr>
+        <td>Fiat Value</td>
+        <td>$<%= (@summary.btc * @current_prices.first.price).round %> <%= @current_prices.first.fiat_currency.code %></td>
+      </tr>
+      <tr>
+        <td>NGU</td>
+        <td><%= @summary.ngu.round(1) %> X</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div>
+  <table>
+    <thead>
+    </thead>
+    <tbody>
+    <% for price in @current_prices do %>
+      <tr>
+        <td>BTC <%= price&.fiat_currency&.code %> price </td>
+        <td><%= price&.price&.round %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<ul>
+  <li>
+    <%= link_to 'Transactions', controller: 'transactions', path: 'index' %>
+  </li>
+  <li>
+    <%= link_to 'Notes', controller: 'transactions', path: 'index' %>
+  </li>
+</ul>
+

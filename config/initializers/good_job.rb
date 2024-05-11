@@ -23,7 +23,7 @@ Rails.application.configure do
       description: "Refresh the historical USD bitcoin prices",
     },
     refresh_cad_historical_prices: {
-      cron: "*5 * * * *",
+      cron: "5 * * * *",
       queues: '*',
       set: { priority: 5 },
       args: ['CAD'],

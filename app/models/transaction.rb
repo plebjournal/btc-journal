@@ -8,4 +8,8 @@ class Transaction < ApplicationRecord
     income: 'income',
     spend: 'spend'
   }
+
+  def self.for_user(user)
+    user.transactions.includes(:fiat_currency)
+  end
 end

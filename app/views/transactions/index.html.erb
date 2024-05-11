@@ -17,30 +17,11 @@
     <% @transactions.each do |transaction| %>
         <%= render partial: 'transaction_list_item', locals: { transaction: transaction } %>
     <% end %>
+    <% @test.each do |t| %>
+      <div><%= t.date %></div>
+    <% end %>
     </tbody>
 
-  </table>
-</div>
-
-<h2>Summary</h2>
-<div>
-  <table>
-    <thead>
-    <tr>
-      <td>Total BTC </td>
-      <td>Total SATS</td>
-      <td>Total Fiat Spend</td>
-      <td>Current Value</td>
-    </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><%= @summary.btc %></td>
-        <td><%= @summary.sats %></td>
-        <td><%= @summary.fiat %></td>
-        <td><%= (@summary.btc * @prices.first.price).round %></td>
-      </tr>
-    </tbody>
   </table>
 </div>
 
