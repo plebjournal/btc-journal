@@ -16,11 +16,14 @@
     </tr>
     </thead>
     <tbody>
-    <% @transactions.each do |presenter| %>
-        <%= render partial: 'transaction_list_item', locals: { presenter: presenter } %>
+    <% @transactions.each do |transaction| %>
+      <%= render partial: 'transaction_list_item', locals: { presenter: transaction } %>
     <% end %>
     </tbody>
   </table>
+  <%== pagy_nav(@pagy) %>
+  <%== pagy_info(@pagy) %>
+
 </div>
 
 <%= link_to "New transaction", new_transaction_path %>

@@ -2,8 +2,8 @@
   <td><%= presenter.transaction.transaction_date.strftime('%Y-%m-%d:%H-%M') %></td>
   <td><%= presenter.transaction.transaction_type %></td>
   <td><%= presenter.transaction.as_btc %></td>
-  <td><%= presenter.transaction.fiat %></td>
+  <td><%= number_to_currency(presenter.transaction.fiat) %></td>
   <td><%= presenter.transaction.fiat_currency.code %></td>
-  <td><%= presenter.current_value.round %></td>
+  <td><%= number_to_currency(presenter.current_value.round(2)) %></td>
   <td><%= presenter.ngu %></td>
 </tr>

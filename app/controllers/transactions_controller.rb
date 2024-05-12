@@ -1,11 +1,12 @@
 class TransactionsController < ApplicationController
+  include Pagy::Backend
   before_action :set_transaction, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
   # GET /transactions or /transactions.json
   def index
-    user_transactions = current_user.transactions.includes(:fiat_currency).order(:transaction_date)
-    @transactions = TransactionListPresenter.new(user_transactions).decorated_transactions
+    @pagy, @records = pagy(current_user.transactions.includes(:fiat_currency).order(:transaction_date))
+    @transactions = @records.map{ |t| TransactionPresenter.new(t) }
   end
 
   # GET /transactions/1 or /transactions/1.json
