@@ -26,6 +26,7 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.user_id = current_user.id
+    @transaction.transaction_date = transaction_params[:transaction_date].in_time_zone(current_user.local_zone)
 
     respond_to do |format|
       if @transaction.save

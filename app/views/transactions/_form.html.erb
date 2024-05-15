@@ -1,7 +1,7 @@
 <%= form_with(model: transaction) do |form| %>
   <div>
     <%= form.label :transaction_date %>
-    <%= form.datetime_field :transaction_date, value: DateTime.current.strftime('%Y-%m-%dT%H:%M') %>
+    <%= form.datetime_field :transaction_date, value: current_user.local_time.strftime('%Y-%m-%dT%H:%M') %>
   </div>
   <div>
     <%= form.label :transaction_type %>
