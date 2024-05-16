@@ -1,4 +1,6 @@
-<%= javascript_importmap_tags 'dashboard' %>
+<% content_for :head do %>
+  <%= javascript_import_module_tag 'dashboard' %>
+<% end %>
 
 <h1>Dashboard</h1>
 <div>
@@ -39,6 +41,10 @@
     <% end %>
     </tbody>
   </table>
+</div>
+
+<div id="chart-container" style="height: 400px; width: 500px;">
+
 </div>
 
 <ul>
