@@ -8,5 +8,10 @@ Rails.application.routes.draw do
 
   resources :transactions
   get 'dashboard' => 'dashboard#index'
+
+  namespace :api do
+    get 'fiat-value' => 'fiat_value#index'
+  end
+
   mount GoodJob::Engine => 'good_job'
 end
