@@ -7,7 +7,8 @@ class Queries
     transactions.reduce(memo, :add_tx)
   end
 
-  def self.moving_total_fiat_value(user, start_date, end_date)
+  def self.moving_total_fiat_value(user, end_date)
+    start_date = user.transactions.order(:transaction_date).first.transaction_date
     historical_prices =
       HistoricalPrice.where(date: start_date..end_date)
                      .where(fiat_currency_id: 1)

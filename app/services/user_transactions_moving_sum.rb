@@ -34,12 +34,12 @@ class UserTransactionsMovingSum
       if @moving_sum.empty?
         return transaction.btc
       end
-      @moving_sum.last.total_btc + transaction.btc
+      @moving_sum.last.total_sats + transaction.btc
     elsif transaction.sell? || transaction.spend?
       if @moving_sum.empty?
         return transaction.btc * -1.0
       end
-      @moving_sum.last.total_btc - transaction.btc
+      @moving_sum.last.total_sats - transaction.btc
     end
   end
 

@@ -1,7 +1,7 @@
 import { createChart } from 'lightweight-charts';
 
 const loadData = async () => {
-  const data = await fetch('/api/fiat-value?start_date=2024-01-01')
+  const data = await fetch('/api/fiat-value')
   return data.json();
 }
 

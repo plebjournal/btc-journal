@@ -5,7 +5,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions or /transactions.json
   def index
-    @pagy, @records = pagy(current_user.transactions.includes(:fiat_currency).order(:transaction_date))
+    @pagy, @records = pagy(current_user.transactions.includes(:fiat_currency).order(transaction_date: :desc))
     @transactions = @records.map{ |t| TransactionPresenter.new(t) }
   end
 
