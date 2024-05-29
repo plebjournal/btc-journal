@@ -2,14 +2,15 @@
 
 module UserTransactionsSummary
   def self.summarize(user)
-    memo = TransactionsSummarizer.new
+    memo = TransactionsSummarizer.new(user)
     user.transactions.reduce(memo, :add_tx)
   end
 
   class TransactionsSummarizer
 
     # initialize summarizer
-    def initialize
+    def initialize(user)
+      @user = user
       @total_btc = 0
       @total_fiat = 0.0
     end
@@ -38,7 +39,7 @@ module UserTransactionsSummary
     end
 
     def ngu
-      current_value = btc * CurrentPrice.first.price
+      current_value = btc * @user.fiat_currency.current_price.price
       current_value / @total_fiat
     end
   end

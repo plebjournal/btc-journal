@@ -27,3 +27,15 @@
 </div>
 
 <%= link_to "New transaction", new_transaction_path %>
+
+<ul>
+  <li>
+    <%= link_to 'Dashboard', controller: 'dashboard' %>
+  </li>
+  <li>
+    <%= link_to 'Notes', controller: 'transactions' %>
+  </li>
+  <li>
+    <%= link_to 'Settings', controller: 'user_settings' %>
+  </li>
+</ul>

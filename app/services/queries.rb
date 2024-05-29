@@ -11,7 +11,7 @@ class Queries
     start_date = user.transactions.order(:transaction_date).first.transaction_date
     historical_prices =
       HistoricalPrice.where(date: start_date..end_date)
-                     .where(fiat_currency_id: 1)
+                     .where(fiat_currency: user.fiat_currency)
                      .where('extract(hour from date) = 0')
                      .order(:date).to_a
     sum = UserTransactionsMovingSum.for_user(user)

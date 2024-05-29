@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_07_031341) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_21_045042) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -136,6 +136,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_031341) do
     t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
+  create_table "user_settings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "time_zone", default: "America/Los_Angeles", null: false
+    t.bigint "fiat_currency_id", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fiat_currency_id"], name: "index_user_settings_on_fiat_currency_id"
+    t.index ["user_id"], name: "index_user_settings_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -152,4 +162,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_07_031341) do
   add_foreign_key "historical_prices", "fiat_currencies"
   add_foreign_key "transactions", "fiat_currencies"
   add_foreign_key "transactions", "users"
+  add_foreign_key "user_settings", "fiat_currencies"
+  add_foreign_key "user_settings", "users"
 end

@@ -1,3 +1,4 @@
+<% fiat_currency = current_user.fiat_currency %>
 <% content_for :head do %>
   <%= javascript_import_module_tag 'dashboard' %>
 <% end %>
@@ -18,7 +19,7 @@
       </tr>
       <tr>
         <td>Fiat Value</td>
-        <td>$<%= (@summary.btc * @current_prices.first.price).round %> <%= @current_prices.first.fiat_currency.code %></td>
+        <td>$<%= (@summary.btc * fiat_currency.current_price.price).round %> <%= fiat_currency.code %></td>
       </tr>
       <tr>
         <td>NGU</td>
@@ -49,10 +50,13 @@
 
 <ul>
   <li>
-    <%= link_to 'Transactions', controller: 'transactions', path: 'index' %>
+    <%= link_to 'Transactions', controller: 'transactions' %>
   </li>
   <li>
-    <%= link_to 'Notes', controller: 'transactions', path: 'index' %>
+    <%= link_to 'Notes', controller: 'transactions' %>
+  </li>
+  <li>
+    <%= link_to 'Settings', controller: 'user_settings' %>
   </li>
 </ul>
 
