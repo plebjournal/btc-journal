@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :user_settings
   resources :transactions
   get 'dashboard' => 'dashboard#index'
+  get 'charts' => 'charts#index'
 
   namespace :api do
     get 'fiat-value' => 'fiat_value#index'

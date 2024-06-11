@@ -1,0 +1,21 @@
+<% content_for :head do %>
+  <%= javascript_import_module_tag 'charts' %>
+<% end %>
+<h1>Charts</h1>
+
+<div id="chart-container" style="height: 400px; width: 600px"></div>
+
+<ul>
+  <li>
+    <%= link_to 'Dashboard', controller: 'dashboard' %>
+  </li>
+  <li>
+    <%= link_to 'Transactions', controller: 'transactions' %>
+  </li>
+  <li>
+    <%= link_to 'Notes', controller: 'transactions' %>
+  </li>
+  <li>
+    <%= link_to 'Settings', controller: 'user_settings' %>
+  </li>
+</ul>
