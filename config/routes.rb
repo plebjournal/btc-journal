@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     get 'fiat-value' => 'fiat_value#index'
+    get 'portfolio' => 'portfolio#index'
   end
 
   mount GoodJob::Engine => 'good_job'

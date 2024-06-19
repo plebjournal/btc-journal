@@ -1,4 +1,5 @@
 <% fiat_currency = current_user.fiat_currency %>
+<% fiat_value = number_to_currency((@summary.btc * fiat_currency.current_price.price).round) %>
 <% content_for :head do %>
   <%= javascript_import_module_tag 'dashboard' %>
 <% end %>
@@ -9,17 +10,13 @@
     <thead>
     </thead>
     <tbody>
+    <tr>
+      <td>Fiat Value</td>
+      <td><strong> <%= fiat_value %> <%= fiat_currency.code %></strong></td>
+    </tr>
       <tr>
         <td>Stack (BTC)</td>
-        <td> <%= @summary.btc %> </td>
-      </tr>
-      <tr>
-        <td>Stack (sats)</td>
-        <td> <%= @summary.sats %></td>
-      </tr>
-      <tr>
-        <td>Fiat Value</td>
-        <td>$<%= (@summary.btc * fiat_currency.current_price.price).round %> <%= fiat_currency.code %></td>
+        <td> <strong> <%= @summary.btc %> </strong> </td>
       </tr>
       <tr>
         <td>NGU</td>
@@ -37,12 +34,14 @@
     <% for price in @current_prices do %>
       <tr>
         <td>BTC <%= price&.fiat_currency&.code %> price </td>
-        <td><%= price&.price&.round %></td>
+        <td><%= number_to_currency(price&.price&.round) %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
 </div>
+
+<h3>Porfolio Value</h3>
 
 <div id="chart-container" style="height: 300px; width: 400px">
 
