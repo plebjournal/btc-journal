@@ -10,6 +10,7 @@ class Queries
                      .where(fiat_currency: user.fiat_currency)
                      .where('extract(hour from date) = 0')
                      .order(:date).to_a
+
     sum = UserTransactionsMovingSum.for_user(user)
     historical = historical_prices.map do |price|
       {
@@ -28,21 +29,49 @@ class Queries
     start_date = user.transactions.order(:transaction_date).first&.transaction_date
     return [] if start_date.blank?
 
+    historical_prices =
+      HistoricalPrice.where(date: start_date..end_date)
+                     .where(fiat_currency: user.fiat_currency)
+                     .where('extract(hour from date) = 0')
+                     .order(:date).to_a
+
     sum = UserTransactionsMovingSum.for_user(user)
-    range = (start_date.tomorrow.to_date .. Date.current).to_a
-    full_date_range = range.prepend(start_date).append(DateTime.current)
-    historical = full_date_range.map do |date|
+    historical = historical_prices.map do |price|
       {
-        time: date.to_time.to_i,
-        value: sum.btc_at_date(date)
+        time: price.date.to_i,
+        value: sum.btc_at_date(price.date)
       }
     end
 
-    historical
+    latest = {
+      time: DateTime.current.to_i,
+      value: sum.btc_at_date(DateTime.current)
+    }
+    historical << latest
   end
 
-  def self.get_date_range(start_date_time)
-    range = (start_date_time.tomorrow.to_date .. Date.current).to_a
-    range.prepend(start_date_time).append(DateTime.current)
+  def self.moving_total_cost_basis(user, end_date)
+    start_date = user.transactions.order(:transaction_date).first&.transaction_date
+    return [] if start_date.blank?
+
+    historical_prices =
+      HistoricalPrice.where(date: start_date..end_date)
+                     .where(fiat_currency: user.fiat_currency)
+                     .where('extract(hour from date) = 0')
+                     .order(:date).to_a
+
+    sum = UserTransactionsMovingSum.for_user(user)
+    historical = historical_prices.map do |price|
+      {
+        time: price.date.to_i,
+        value: sum.fiat_at_date(price.date)
+      }
+    end
+
+    latest = {
+      time: DateTime.current.to_i,
+      value: sum.fiat_at_date(DateTime.current)
+    }
+    historical << latest
   end
 end

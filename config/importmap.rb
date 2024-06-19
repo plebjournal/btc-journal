@@ -3,5 +3,5 @@
 pin "dashboard"
 pin "application"
 pin "charts"
-pin "lightweight-charts" # @4.1.4
+pin "lightweight-charts" # @4.1.5
 pin "fancy-canvas" # @2.1.0

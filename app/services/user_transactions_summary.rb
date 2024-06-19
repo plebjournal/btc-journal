@@ -18,10 +18,10 @@ module UserTransactionsSummary
     def add_tx(transaction)
       if transaction.buy? || transaction.income?
         @total_btc += transaction.btc
-        @total_fiat += transaction.fiat
+        @total_fiat += (transaction.fiat || 0.0)
       elsif transaction.sell? || transaction.spend?
         @total_btc -= transaction.btc
-        @total_fiat -= transaction.fiat
+        @total_fiat -= (transaction.fiat || 0.0)
       end
       self
     end

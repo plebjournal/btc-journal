@@ -14,13 +14,18 @@
       <td>Fiat Value</td>
       <td><strong> <%= fiat_value %> <%= fiat_currency.code %></strong></td>
     </tr>
-      <tr>
-        <td>Stack (BTC)</td>
-        <td> <strong> <%= @summary.btc %> </strong> </td>
-      </tr>
+    <tr>
+      <td>Stack (BTC)</td>
+      <td> <strong> <%= @summary.btc %> </strong> </td>
+    </tr>
+      <td>Cost Basis</td>
+      <td><%= number_to_currency(@summary.fiat) %></td>
+    <tr>
+
+    </tr>
       <tr>
         <td>NGU</td>
-        <td><%= @summary.ngu.round(1) %> X</td>
+        <td> <strong> <%= @summary.ngu.round(1) %> X </strong></td>
       </tr>
     </tbody>
   </table>

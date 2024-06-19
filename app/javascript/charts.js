@@ -1,6 +1,6 @@
 import { createChart } from 'lightweight-charts';
 
-const loadData = async () => {
+const loadFiatValue = async () => {
   const data = await fetch('/api/fiat-value')
   return data.json();
 }
@@ -10,7 +10,12 @@ const loadBtcStack = async () => {
   return data.json();
 }
 
-const initChart = async () => {
+const loadCostBasis = async () => {
+  const data = await fetch('/api/cost-basis')
+  return data.json();
+}
+
+const initValueAndStackChart = async () => {
   const chartOptions = {
     rightPriceScale: {
       visible: true,
@@ -24,9 +29,6 @@ const initChart = async () => {
         type: 'solid',
         color: 'white'
       }
-    },
-    crosshair: {
-      mode: 0
     }
   };
   const chart = createChart(document.getElementById('chart-container'), chartOptions);
@@ -39,17 +41,58 @@ const initChart = async () => {
 
   const btcStackAreaSeries = chart.addLineSeries({
     priceScaleId: 'left',
-    color: '#ffcc00',
+    color: '#f08f1b',
     lineWidth: 4,
   });
 
-  const data = await loadData();
+  const data = await loadFiatValue();
   const btcStack = await loadBtcStack();
+
   areaSeries.setData(data);
   btcStackAreaSeries.setData(btcStack);
 
   chart.timeScale().fitContent();
 }
 
-initChart();
 
+const initCostBasisChart = async () => {
+  const chartOptions = {
+    rightPriceScale: {
+      visible: true,
+    },
+    leftPriceScale: {
+      visible: true,
+    },
+    layout: {
+      textColor: 'black',
+      background: {
+        type: 'solid',
+        color: 'white'
+      }
+    }
+  };
+  const chart = createChart(document.getElementById('cost-basis-chart-container'), chartOptions);
+  const areaSeries = chart.addAreaSeries({
+    priceScaleId: 'right',
+    lineColor: '#2962FF',
+    topColor: '#2962FF',
+    bottomColor: 'rgba(41, 98, 255, 0.28)',
+  });
+
+  const btcStackAreaSeries = chart.addAreaSeries({
+    lineColor: '#2c9a0c',
+    topColor: '#2c9a0c',
+    bottomColor: 'rgba(44,154,12,0.28)',
+  });
+
+  const data = await loadFiatValue();
+  const costBasis = await loadCostBasis();
+
+  areaSeries.setData(data);
+  btcStackAreaSeries.setData(costBasis);
+
+  chart.timeScale().fitContent();
+}
+
+initValueAndStackChart();
+initCostBasisChart();
