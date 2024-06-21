@@ -2,6 +2,13 @@
 
 <h1>Transactions</h1>
 
+<div>
+  <%= link_to "New transaction", new_transaction_path %>
+  <%= link_to "Import Transactions", controller: 'import_transactions' %>
+</div>
+
+<br/>
+
 <div id="transactions">
   <table>
     <thead>
@@ -25,8 +32,6 @@
   <%== pagy_info(@pagy) %>
 
 </div>
-
-<%= link_to "New transaction", new_transaction_path %>
 
 <ul>
   <li>

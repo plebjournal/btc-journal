@@ -20,6 +20,7 @@ class TransactionPresenter
     (current_value / original_value).round(1)
   end
 
+
   private
   def calculate_current_value
     fiat = @transaction.fiat_currency

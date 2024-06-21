@@ -1,0 +1,41 @@
+<h1>Import Transactions</h1>
+
+<h3>CSV must be in the following format</h3>
+<table>
+  <thead>
+    <tr>
+      <td><pre>transaction_date,</pre></td>
+      <td><pre>transaction_type,</pre></td>
+      <td><pre>btc,</pre></td>
+      <td><pre>fiat,</pre></td>
+      <td><pre>fiat_currency</pre></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><pre>2024-06-17 00:30:00.000000,</pre></td>
+      <td><pre>buy,</pre></td>
+      <td><pre>1074000,</pre></td>
+      <td><pre>1000,</pre></td>
+      <td><pre>CAD,</pre></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= form_with url: upload_import_transactions_url do |form| %>
+  <%= form.file_field :transactions_file %>
+  <%= form.button 'Upload' %>
+<% end %>
+
+<br/>
+<ul>
+  <li>
+    <%= link_to 'Dashboard', controller: 'dashboard' %>
+  </li>
+  <li>
+    <%= link_to 'Notes', controller: 'transactions' %>
+  </li>
+  <li>
+    <%= link_to 'Settings', controller: 'user_settings' %>
+  </li>
+</ul>

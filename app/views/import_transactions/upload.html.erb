@@ -1,0 +1,54 @@
+<h1>Review the transactions to upload</h1>
+
+<table>
+  <thead>
+  <tr>
+    <td>Time</td>
+    <td>Type</td>
+    <td>BTC Amount</td>
+    <td>Fiat Amount</td>
+    <td>Fiat</td>
+  </tr>
+  </thead>
+  <tbody>
+  <% @transactions_to_import.each do |transaction| %>
+    <tr>
+      <td><%= transaction.transaction_date %></td>
+      <td><%= transaction.transaction_type %></td>
+      <td><%= transaction.btc %></td>
+      <td><%= number_to_currency(transaction.fiat) %></td>
+      <td><%= transaction.fiat_currency.code %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<% if @transactions_to_import.blank? %>
+  <p>No transaction to import</p>
+<% end %>
+
+<%= form_with model: @transactions_to_import, url: import_transactions_url do |form| %>
+  <% @transactions_to_import.each do |tx| %>
+    <%= form.fields_for tx, index: tx.id do |tx_form| %>
+      <%= tx_form.hidden_field :transaction_date %>
+      <%= tx_form.hidden_field :transaction_type %>
+      <%= tx_form.hidden_field :fiat %>
+      <%= tx_form.hidden_field :btc %>
+      <%= tx_form.hidden_field :fiat_currency_id %>
+    <% end %>
+  <% end %>
+  <%= form.button 'Save Transactions' %>
+<% end %>
+
+<br/>
+<ul>
+  <li>
+    <%= link_to 'Dashboard', controller: 'dashboard' %>
+  </li>
+  <li>
+    <%= link_to 'Notes', controller: 'transactions' %>
+  </li>
+  <li>
+    <%= link_to 'Settings', controller: 'user_settings' %>
+  </li>
+</ul>

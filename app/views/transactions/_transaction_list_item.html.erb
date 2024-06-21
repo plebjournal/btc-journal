@@ -1,5 +1,5 @@
 <tr id=<%= dom_id presenter.transaction %>>
-  <td><%= presenter.transaction.transaction_date.strftime('%Y-%m-%d:%H-%M') %></td>
+  <td><%= presenter.transaction.local_transaction_date.strftime('%Y-%m-%d %I:%M %p') %> <%= current_user.local_zone.abbreviation %></td>
   <td><%= presenter.transaction.transaction_type %></td>
   <td><%= presenter.transaction.as_btc %></td>
   <td><%= number_to_currency(presenter.transaction.fiat) %></td>

@@ -20,4 +20,8 @@ class Transaction < ApplicationRecord
   def as_btc
     btc.to_f / 100_000_000.to_f
   end
+
+  def local_transaction_date
+    user.local_zone.to_local(transaction_date)
+  end
 end

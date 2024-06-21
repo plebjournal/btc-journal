@@ -9,6 +9,11 @@ Rails.application.routes.draw do
 
   resources :user_settings
   resources :transactions
+  resource :import_transactions do
+    get :index
+    post :upload
+    post :create
+  end
   get 'dashboard' => 'dashboard#index'
   get 'charts' => 'charts#index'
 
