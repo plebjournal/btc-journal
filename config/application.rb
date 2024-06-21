@@ -25,5 +25,10 @@ module Journal
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.active_job.queue_adapter = :good_job
+
+    # Allow the app to be iframed on replit.com
+    config.action_dispatch.default_headers = {
+    'X-Frame-Options' => 'ALLOWFROM replit.com'
+    }
   end
 end
