@@ -1,4 +1,4 @@
-run = "bundle exec rails server --binding=0.0.0.0"
+run = "bundle exec rails server --binding=0.0.0.0 -e development"
 hidden = [".bundle"]
 modules = ["ruby-3.2:v6-20240209-9e3a339"]
 
@@ -9,4 +9,8 @@ channel = "stable-23_11"
 requiredFiles = [".replit", "replit.nix"]
 
 [deployment]
-run = ["sh", "-c", "bundle exec rails server --binding=0.0.0.0"]
+run = ["sh", "-c", "bundle exec rails server --binding=0.0.0.0 -e production"]
+
+[[ports]]
+localPort = 3000
+externalPort = 80

@@ -1,6 +1,7 @@
 {pkgs}: {
   deps = [
-    pkgs.postgresql_16
+    pkgs.postgresql
+    pkgs.libpqxx
     pkgs.libyaml
   ];
 }
