@@ -1,23 +1,24 @@
+<% local_now = current_user.local_time.strftime('%Y-%m-%dT%H:%M') %>
 <%= form_with(model: transaction) do |form| %>
   <div>
     <%= form.label :transaction_date %>
-    <%= form.datetime_field :transaction_date, value: current_user.local_time.strftime('%Y-%m-%dT%H:%M') %>
+    <%= form.datetime_field :transaction_date, value: transaction.transaction_date || local_now %>
   </div>
   <div>
     <%= form.label :transaction_type %>
-    <%= form.select :transaction_type, ['buy', 'sell'] %>
+    <%= form.select :transaction_type, ['buy', 'sell'], value: transaction.transaction_type %>
   </div>
   <div>
     <%= form.label(:btc, 'BTC (Sats)') %>
-    <%= form.number_field :btc, value: 0 %>
+    <%= form.number_field :btc, value: transaction.btc || 0 %>
   </div>
   <div>
     <%= form.label(:fiat, 'Fiat') %>
-    <%= form.number_field :fiat, value: 0 %>
+    <%= form.number_field :fiat, value: transaction.fiat || 0 %>
   </div>
   <div>
     <%= form.label(:fiat_currency_id, 'Fiat Currency') %>
-    <%= form.select :fiat_currency_id, FiatCurrency.all.pluck(:code, :id)%>
+    <%= form.select :fiat_currency_id, FiatCurrency.all.pluck(:code, :id), value: transaction.fiat_currency_id%>
   </div>
 
   <% if transaction.errors.any? %>

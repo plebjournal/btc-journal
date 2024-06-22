@@ -1,9 +1,32 @@
-<div id="<%= dom_id transaction %>">
-  <tr>
-    <td><%= transaction.transaction_date.strftime('%Y-%m-%d:%H-%M') %></td>
-    <td><%= transaction.transaction_type %></td>
-    <td><%= transaction.btc %></td>
-    <td><%= transaction.fiat %></td>
-    <td><%= transaction.fiat_currency.code %></td>
-  </tr>
+
+<div>
+  <table>
+    <tbody>
+      <tr>
+        <td>Transaction Date: </td>
+        <td> <%= transaction.transaction_date.strftime('%Y-%m-%d %I:%M %p') %></td>
+      </tr>
+      <tr>
+        <td>Transaction Type: </td>
+        <td> <%= transaction.transaction_type %></td>
+      </tr>
+      <tr>
+        <td> BTC </td>
+        <td> <%= number_with_precision(transaction.as_btc, precision: 8) %></td>
+      </tr>
+      <tr>
+        <td> BTC (sats) </td>
+        <td> <%= number_to_human(transaction.as_sats) %></td>
+      </tr>
+      <tr>
+        <td> Fiat </td>
+        <td> <%=  number_to_currency(transaction.fiat) %></td>
+      </tr>
+      <tr>
+        <td>NgU</td>
+        <td> <%= TransactionPresenter.new(transaction).ngu %></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
+

@@ -6,4 +6,11 @@
   <td><%= presenter.transaction.fiat_currency.code %></td>
   <td><%= number_to_currency(presenter.current_value.round(2)) %></td>
   <td><%= presenter.ngu %></td>
+
+  <td>
+    <%= link_to 'Details', transaction_path(presenter.transaction) %>
+  </td>
+  <td>
+    <%= link_to 'Edit', edit_transaction_path(presenter.transaction) %>
+  </td>
 </tr>

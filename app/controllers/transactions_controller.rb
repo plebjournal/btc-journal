@@ -20,6 +20,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/1/edit
   def edit
+    @transaction = Transaction.find(params.require(:id))
   end
 
   # POST /transactions or /transactions.json
