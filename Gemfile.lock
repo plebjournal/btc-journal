@@ -107,6 +107,7 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    dotenv (3.1.2)
     drb (2.2.1)
     erubi (1.12.0)
     et-orbi (1.2.11)
@@ -281,6 +282,7 @@ DEPENDENCIES
   capybara
   debug
   devise (~> 4.9, >= 4.9.4)
+  dotenv
   good_job (~> 3.28)
   httparty (~> 0.22.0)
   importmap-rails
