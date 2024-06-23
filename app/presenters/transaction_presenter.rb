@@ -17,7 +17,9 @@ class TransactionPresenter
   end
 
   def ngu
-    (current_value / original_value).round(1)
+    if @transaction.fiat
+      (current_value / original_value).round(1)
+    end
   end
 
 

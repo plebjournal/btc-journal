@@ -54,12 +54,14 @@ class UserTransactionsMovingSum
       if @moving_sum.empty?
         return transaction.fiat
       end
-      @moving_sum.last.total_fiat + transaction.fiat
+      @moving_sum.last.total_fiat + (transaction.fiat || 0.0)
     elsif transaction.sell?
       if @moving_sum.empty?
         return transaction.fiat * -1.0
       end
-      @moving_sum.last.total_fiat - transaction.fiat
+      @moving_sum.last.total_fiat - (transaction.fiat || 0.0)
+    else
+      @moving_sum.last&.total_fiat || 0.0
     end
   end
 

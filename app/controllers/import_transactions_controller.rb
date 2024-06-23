@@ -43,7 +43,7 @@ class ImportTransactionsController < ApplicationController
       transaction_date: table_row['transaction_date'],
       btc: table_row['btc'],
       fiat: table_row['fiat'],
-      transaction_type: table_row['transaction_type'],
+      transaction_type: table_row['transaction_type']&.downcase,
       fiat_currency_id: parse_fiat(table_row['fiat_currency']),
       user_id: user_id
     )
