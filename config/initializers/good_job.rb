@@ -33,7 +33,3 @@ Rails.application.configure do
     }
   }
 end
-
-Rails.application.config.after_initialize do
-  RefreshCurrentPricesJob.perform_later
-end
