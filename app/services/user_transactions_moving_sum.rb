@@ -18,13 +18,12 @@ class UserTransactionsMovingSum
   end
 
   def btc_at_date(date)
-    moving_sum = @moving_sum.filter { |m| m.date <= date }.last
-    moving_sum.total_btc if moving_sum.present?
+    @moving_sum.filter { |m| m.date <= date }.last&.total_btc || 0.0
+
   end
 
   def fiat_at_date(date)
-    moving_sum = @moving_sum.filter { |m| m.date <= date }.last
-    moving_sum.total_fiat if moving_sum.present?
+    @moving_sum.filter { |m| m.date <= date }.last&.total_fiat || 0.0
   end
 
   private
