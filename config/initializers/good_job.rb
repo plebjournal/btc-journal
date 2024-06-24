@@ -6,7 +6,7 @@ Rails.application.configure do
   config.good_job.enable_cron = true
   config.good_job.cron = {
     refresh_current_prices: {
-      cron: '*/5 * * * *',
+      cron: '5 * * * *',
       queues: '*',
       set: { priority: 10 },
       class: 'RefreshCurrentPricesJob',
@@ -14,7 +14,7 @@ Rails.application.configure do
       description: 'Refresh the latest bitcoin price'
     },
     refresh_usd_historical_prices: {
-      cron: '0 * * * *',
+      cron: '0 12 * * *',
       queues: '*',
       set: { priority: 5 },
       args: ['USD'],
@@ -23,7 +23,7 @@ Rails.application.configure do
       description: 'Refresh the historical USD bitcoin prices'
     },
     refresh_cad_historical_prices: {
-      cron: '5 * * * *',
+      cron: '5 12 * * *',
       queues: '*',
       set: { priority: 5 },
       args: ['CAD'],
