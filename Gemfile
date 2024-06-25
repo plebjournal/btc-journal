@@ -51,8 +51,6 @@ gem 'good_job', "~> 3.28"
 
 gem 'pagy', '~> 8.4'
 
-gem 'whenever', require: false
-
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
