@@ -22,6 +22,4 @@ Rails.application.routes.draw do
     get 'portfolio' => 'portfolio#index'
     get 'cost-basis' => 'cost_basis#index'
   end
-
-  mount GoodJob::Engine => 'good_job'
 end
