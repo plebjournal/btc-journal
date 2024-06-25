@@ -24,7 +24,7 @@ module Journal
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    config.active_job.queue_adapter = :good_job
+    # config.active_job.queue_adapter = :good_job
 
     # Allow the app to be iframed on replit.com
     config.action_dispatch.default_headers = {
