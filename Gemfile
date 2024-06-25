@@ -47,8 +47,6 @@ gem 'devise', '~> 4.9', '>= 4.9.4'
 # Makes http fun! Also, makes consuming restful web services dead easy.
 gem 'httparty', '~> 0.22.0'
 
-gem 'good_job', "~> 3.28"
-
 gem 'pagy', '~> 8.4'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
