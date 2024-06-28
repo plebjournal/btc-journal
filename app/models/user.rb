@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :transactions, dependent: :destroy
   has_one :user_setting, dependent: :destroy, inverse_of: :user
 
+  after_create :create_user_setting
+
   def fiat_currency
     user_setting&.fiat_currency || FiatCurrency.first
   end
@@ -20,5 +22,9 @@ class User < ApplicationRecord
 
   def local_time
     local_zone.now
+  end
+
+  def create_user_setting
+    UserSetting.create(user_id: id)
   end
 end
