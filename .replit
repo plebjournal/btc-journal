@@ -11,6 +11,7 @@ requiredFiles = [".replit", "replit.nix"]
 [deployment]
 run = ["sh", "-c", "bundle exec rails server --binding=0.0.0.0"]
 build = ["sh", "-c", "bundle exec bin/rails db:migrate && bundle exec bin/rails assets:precompile"]
+deploymentTarget = "cloudrun"
 
 [[ports]]
 localPort = 3000
