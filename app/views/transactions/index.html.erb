@@ -10,17 +10,19 @@
 <br/>
 
 <div id="transactions">
-  <table>
+  <table class="table table-striped table-responsive">
     <thead>
-    <tr>
-      <td>Time</td>
-      <td>Type</td>
-      <td>BTC Amount</td>
-      <td>Fiat Amount</td>
-      <td>Fiat</td>
-      <td>Current Value</td>
-      <td>NGU</td>
-    </tr>
+      <tr>
+        <th scope="col">Time</th>
+        <th scope="col">Type</th>
+        <th scope="col">BTC Amount</th>
+        <th scope="col">Fiat Amount</th>
+        <th scope="col">Fiat</th>
+        <th scope="col">Current Value</th>
+        <th scope="col">NGU</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
     </thead>
     <tbody>
     <% @transactions.each do |transaction| %>
@@ -32,15 +34,3 @@
   <%== pagy_info(@pagy) %>
 
 </div>
-
-<ul>
-  <li>
-    <%= link_to 'Dashboard', controller: 'dashboard' %>
-  </li>
-  <li>
-    <%= link_to 'Notes', controller: 'transactions' %>
-  </li>
-  <li>
-    <%= link_to 'Settings', controller: 'user_settings' %>
-  </li>
-</ul>

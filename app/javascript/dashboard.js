@@ -5,6 +5,14 @@ const loadData = async () => {
   return data.json();
 }
 
+const oneYearDateRange = () => {
+  const currentDate = new Date()
+  return {
+    from: new Date(currentDate.getFullYear() - 1, currentDate.getMonth(), currentDate.getDay()).getTime() / 1000,
+    to: currentDate.getTime() / 1000
+  }
+}
+
 const initChart = async () => {
   const chartOptions = { layout: { textColor: 'black', background: { type: 'solid', color: 'white' } } };
   const chart = createChart(document.getElementById('chart-container'), chartOptions);
@@ -15,7 +23,8 @@ const initChart = async () => {
   const data = await loadData();
   areaSeries.setData(data);
 
-  chart.timeScale().fitContent();
+
+  chart.timeScale().setVisibleRange(oneYearDateRange())
 }
 
 initChart();

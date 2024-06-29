@@ -1,69 +1,46 @@
 <% fiat_currency = current_user.fiat_currency %>
 <% fiat_value = number_to_currency((@summary.btc * fiat_currency.current_price.price).round) %>
+<% current_price = fiat_currency.current_price %>
 <% content_for :head do %>
   <%= javascript_import_module_tag 'dashboard' %>
 <% end %>
 
-<h1>Dashboard</h1>
-<div>
-  <table>
-    <thead>
-    </thead>
-    <tbody>
-    <tr>
-      <td>Fiat Value</td>
-      <td><strong> <%= fiat_value %> <%= fiat_currency.code %></strong></td>
-    </tr>
-    <tr>
-      <td>Stack (BTC)</td>
-      <td> <strong> <%= @summary.btc %> </strong> </td>
-    </tr>
-      <td>Cost Basis</td>
-      <td><%= number_to_currency(@summary.fiat) %></td>
-    <tr>
-
-    </tr>
-      <tr>
-        <td>NGU</td>
-        <td> <strong> <%= @summary.ngu.round(1) %> X </strong></td>
-      </tr>
-    </tbody>
-  </table>
+<div class="text-center">
+  <div class="row align-items-center mb-4 mt-4">
+    <h1>Dashboard</h1>
+  </div>
 </div>
 
-<div>
-  <table>
-    <thead>
-    </thead>
-    <tbody>
-    <% for price in @current_prices do %>
-      <tr>
-        <td>BTC <%= price&.fiat_currency&.code %> price </td>
-        <td><%= number_to_currency(price&.price&.round) %></td>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
+<div class="text-center">
+  <div class="row align-items-center">
+    <div class="col-12 col-sm-3 ">
+      <p class="lead">Fiat Value: <strong class="fw-bold"><%= fiat_value %> <%= fiat_currency.code %></strong></p>
+    </div>
+    <div class="col-12 col-sm-3 ">
+      <p class="lead">Stack (BTC): <strong class="fw-bold"><%= @summary.btc %></strong></p>
+    </div>
+    <div class="col-12 col-sm-3 ">
+      <p class="lead">Cost Basis: <strong class="fw-bold"><%= number_to_currency(@summary.fiat) %> <%= fiat_currency.code %></strong></p>
+    </div>
+    <div class="col-12 col-sm-3">
+      <p class="lead">NGU: <strong class="fw-bold"><%= @summary.ngu.round(1) %> X</strong></p>
+    </div>
+    <div class="col-12 col-sm-3">
+      <p class="lead"> Current <%= fiat_currency.code %> Price:
+        <strong class="fw-bold">
+          <%= number_to_currency(current_price.price) %>
+        </strong></p>
+    </div>
+  </div>
 </div>
 
-<h3>Porfolio Value</h3>
-
-<div id="chart-container" style="height: 300px; width: 100%">
-
+<div class="text-center">
+  <div class="row align-items-center mb-5">
+    <h3>Fiat Value</h3>
+  </div>
 </div>
 
-<ul>
-  <li>
-    <%= link_to 'Transactions', controller: 'transactions' %>
-  </li>
-  <li>
-    <%= link_to 'Charts', controller: 'charts' %>
-  </li>
-  <li>
-    <%= link_to 'Notes', controller: 'transactions' %>
-  </li>
-  <li>
-    <%= link_to 'Settings', controller: 'user_settings' %>
-  </li>
-</ul>
+<div id="chart-container" style="height: 400px; width: 100%">
+</div>
+
 

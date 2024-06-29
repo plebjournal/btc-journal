@@ -15,6 +15,14 @@ const loadCostBasis = async () => {
   return data.json();
 }
 
+const oneYearDateRange = () => {
+  const currentDate = new Date()
+  return {
+    from: new Date(currentDate.getFullYear() - 1, currentDate.getMonth(), currentDate.getDay()).getTime() / 1000,
+    to: currentDate.getTime() / 1000
+  }
+}
+
 const initValueAndStackChart = async () => {
   const chartOptions = {
     rightPriceScale: {
@@ -51,7 +59,7 @@ const initValueAndStackChart = async () => {
   areaSeries.setData(data);
   btcStackAreaSeries.setData(btcStack);
 
-  chart.timeScale().fitContent();
+  chart.timeScale().setVisibleRange(oneYearDateRange());
 }
 
 
@@ -91,7 +99,7 @@ const initCostBasisChart = async () => {
   areaSeries.setData(data);
   btcStackAreaSeries.setData(costBasis);
 
-  chart.timeScale().fitContent();
+  chart.timeScale().setVisibleRange(oneYearDateRange());
 }
 
 initValueAndStackChart();
