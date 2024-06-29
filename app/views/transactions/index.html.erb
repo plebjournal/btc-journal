@@ -1,8 +1,10 @@
+<% decorated_transactions = @transactions.map {|t| TransactionPresenter.new(t) } %>
 <p style="color: green"><%= notice %></p>
+
 
 <h1>Transactions</h1>
 
-<div>
+<div class="mb-6">
   <%= link_to "New transaction", new_transaction_path %>
   <%= link_to "Import Transactions", controller: 'import_transactions' %>
 </div>
@@ -13,10 +15,10 @@
   <table class="table table-striped table-responsive">
     <thead>
       <tr>
-        <th scope="col">Time</th>
-        <th scope="col">Type</th>
-        <th scope="col">BTC Amount</th>
-        <th scope="col">Fiat Amount</th>
+        <th scope="col"><%= sort_link(@q, :transaction_date, default_order: :desc) %></th>
+        <th scope="col"><%= sort_link(@q, :transaction_type, 'Type') %></th>
+        <th scope="col"><%= sort_link(@q, :btc, 'BTC') %></th>
+        <th scope="col"><%= sort_link(@q, :fiat, 'Fiat Amount') %></th>
         <th scope="col">Fiat</th>
         <th scope="col">Current Value</th>
         <th scope="col">NGU</th>
@@ -25,12 +27,13 @@
       </tr>
     </thead>
     <tbody>
-    <% @transactions.each do |transaction| %>
+    <% decorated_transactions.each do |transaction| %>
       <%= render partial: 'transaction_list_item', locals: { presenter: transaction } %>
     <% end %>
     </tbody>
   </table>
-  <%== pagy_nav(@pagy) %>
-  <%== pagy_info(@pagy) %>
+</div>
 
+<div class="text-body">
+  <%= paginate @transactions %>
 </div>

@@ -24,4 +24,8 @@ class Transaction < ApplicationRecord
   def local_transaction_date
     user.local_zone.to_local(transaction_date)
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ['transaction_date', 'btc', 'fiat', 'transaction_type']
+  end
 end
