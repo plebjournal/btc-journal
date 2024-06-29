@@ -23,19 +23,10 @@
 </table>
 
 <%= form_with url: upload_import_transactions_url do |form| %>
-  <%= form.file_field :transactions_file %>
-  <%= form.button 'Upload' %>
-<% end %>
+  <div class="mb-3">
+    <%= form.label :transactions_file, class: 'form-label' %>
+    <%= form.file_field :transactions_file, class: 'form-control' %>
 
-<br/>
-<ul>
-  <li>
-    <%= link_to 'Dashboard', controller: 'dashboard' %>
-  </li>
-  <li>
-    <%= link_to 'Notes', controller: 'transactions' %>
-  </li>
-  <li>
-    <%= link_to 'Settings', controller: 'user_settings' %>
-  </li>
-</ul>
+  </div>
+  <%= form.button 'Upload', class: 'btn btn-primary' %>
+<% end %>

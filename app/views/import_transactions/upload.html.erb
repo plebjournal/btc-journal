@@ -1,6 +1,6 @@
 <h1>Review the transactions to upload</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
   <tr>
     <td>Time</td>
@@ -37,18 +37,5 @@
       <%= tx_form.hidden_field :fiat_currency_id %>
     <% end %>
   <% end %>
-  <%= form.button 'Save Transactions' %>
+  <%= form.button 'Save Transactions', class: 'btn btn-primary' %>
 <% end %>
-
-<br/>
-<ul>
-  <li>
-    <%= link_to 'Dashboard', controller: 'dashboard' %>
-  </li>
-  <li>
-    <%= link_to 'Notes', controller: 'transactions' %>
-  </li>
-  <li>
-    <%= link_to 'Settings', controller: 'user_settings' %>
-  </li>
-</ul>
