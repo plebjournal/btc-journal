@@ -2,6 +2,10 @@ class Transaction < ApplicationRecord
   belongs_to :fiat_currency
   belongs_to :user, inverse_of: :transactions
 
+  validates :transaction_date, presence: true
+  validates :btc, presence: true, numericality: { greater_than_or_equal_to: 1 }
+  validates :fiat, numericality: { greater_than_or_equal_to: 0 } if present?
+
   enum transaction_type: {
     buy: 'buy',
     sell: 'sell',

@@ -6,7 +6,11 @@
   <td><%= number_to_currency(presenter.transaction.fiat) %></td>
   <td><%= presenter.transaction.fiat_currency.code %></td>
   <td><%= number_to_currency(presenter.current_value.round(2)) %></td>
-  <td><%= presenter.ngu %><%= 'x' if presenter.ngu %></td>
+  <td class="fw-bold">
+    <%= presenter.ngu %>
+    <%= "x" if presenter.ngu %>
+    <span class="fs-4"><%= NumberGoUpPresenter.emoji(presenter.ngu) if presenter.ngu %></span>
+  </td>
 
   <td>
     <%= link_to 'Details', transaction_path(presenter.transaction) %>

@@ -23,7 +23,7 @@
       <p class="lead">Cost Basis: <strong class="fw-bold"><%= number_to_currency(@summary.fiat) %> <%= fiat_currency.code %></strong></p>
     </div>
     <div class="col-12 col-sm-3">
-      <p class="lead">NGU: <strong class="fw-bold"><%= @summary.ngu.round(1) %> X</strong></p>
+      <p class="lead">NgU: <strong class="fw-bold"><%= @summary.ngu.round(1) %>x <%= NumberGoUpPresenter.emoji(@summary.ngu.round(1)) %> </strong></p>
     </div>
     <div class="col-12 col-sm-3">
       <p class="lead"> Current <%= fiat_currency.code %> Price:
