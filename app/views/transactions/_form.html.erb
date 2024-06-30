@@ -1,40 +1,44 @@
 <% local_now = current_user.local_time.strftime('%Y-%m-%dT%H:%M') %>
 
-<%= form_with(model: transaction) do |form| %>
-  <div class="mb-3">
-    <%= form.label :transaction_date, class: 'form-label' %>
-    <%= form.datetime_field :transaction_date, value: transaction.transaction_date || local_now, class: 'form-control' %>
-  </div>
-  <div class="mb-3">
-    <%= form.label :transaction_type, class: 'form-label' %>
-    <%= form.select :transaction_type, ['buy', 'sell'], { value: transaction.transaction_type }, { class: 'form-select' } %>
-  </div>
-  <div class="mb-3">
-    <%= form.label :btc, 'BTC (Sats)', class: 'form-label' %>
-    <%= form.number_field :btc, { value: transaction.btc || 0, class: 'form-control'} %>
-  </div>
-  <div class="mb-3">
-    <%= form.label :fiat, 'Fiat', class: 'form-label' %>
-    <%= form.number_field :fiat, value: transaction.fiat || 0, class: 'form-control' %>
-  </div>
-  <div class="mb-3">
-    <%= form.label :fiat_currency_id, 'Fiat Currency', class: 'form-label' %>
-    <%= form.select :fiat_currency_id, FiatCurrency.all.pluck(:code, :id), { value: transaction.fiat_currency_id }, { class: 'form-select' } %>
-  </div>
+<div class="row mt-3">
+  <div class="col-12 col-lg-6">
+    <%= form_with(model: transaction) do |form| %>
+      <div class="mb-3">
+        <%= form.label :transaction_date, class: 'form-label fw-bold' %>
+        <%= form.datetime_field :transaction_date, value: transaction.transaction_date || local_now, class: 'form-control' %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :transaction_type, class: 'form-label fw-bold' %>
+        <%= form.select :transaction_type, ['buy', 'sell'], { value: transaction.transaction_type }, { class: 'form-select' } %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :btc, 'Sats', class: 'form-label fw-bold' %>
+        <%= form.number_field :btc, { value: transaction.btc || 0, class: 'form-control'} %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :fiat, 'Fiat', class: 'form-label fw-bold' %>
+        <%= form.number_field :fiat, value: transaction.fiat || 0, class: 'form-control' %>
+      </div>
+      <div class="mb-3">
+        <%= form.label :fiat_currency_id, 'Fiat Currency', class: 'form-label fw-bold' %>
+        <%= form.select :fiat_currency_id, FiatCurrency.all.pluck(:code, :id), { value: transaction.fiat_currency_id }, { class: 'form-select' } %>
+      </div>
 
-  <% if transaction.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+      <% if transaction.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
 
-      <ul>
-        <% transaction.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% transaction.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <div>
-    <%= form.submit( class: 'btn btn-primary') %>
+      <div>
+        <%= form.submit( class: 'w-100 btn btn-lg btn-primary') %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>

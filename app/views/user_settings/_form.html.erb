@@ -1,27 +1,31 @@
-<%= form_with(model: user_setting) do |form| %>
-  <div>
-    <%= form.label :fiat_currency_id, 'Preferred Fiat Currency' %>
-    <%= form.select :fiat_currency_id, FiatCurrency.all.pluck(:code, :id) %>
+<div class="row">
+  <div class="col-12 col-lg-6">
+    <%= form_with(model: user_setting) do |form| %>
+      <div class="mb-3">
+        <%= form.label :fiat_currency_id, 'Preferred Fiat Currency', class: 'form-label fw-bold' %>
+        <%= form.select :fiat_currency_id, FiatCurrency.all.pluck(:code, :id), {}, { class: 'form-select'} %>
+      </div>
+
+      <div class="mb-3">
+        <%= form.label :time_zone, 'Time Zone', class: 'form-label fw-bold' %>
+        <%= form.select :time_zone, TZInfo::Timezone.all_identifiers, {}, { class: 'form-select' } %>
+      </div>
+
+      <% if user_setting.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(user_setting.errors.count, "error") %> prohibited this user_setting from being saved:</h2>
+
+          <ul>
+            <% user_setting.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="">
+        <%= form.submit 'Save', class: 'w-100 btn btn-lg btn-primary' %>
+      </div>
+    <% end %>
   </div>
-
-  <div>
-    <%= form.label :time_zone, 'Time Zone' %>
-    <%= form.select :time_zone, TZInfo::Timezone.all_identifiers %>
-  </div>
-
-  <% if user_setting.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(user_setting.errors.count, "error") %> prohibited this user_setting from being saved:</h2>
-
-      <ul>
-        <% user_setting.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div>
-    <%= form.submit 'Save' %>
-  </div>
-<% end %>
+</div>
