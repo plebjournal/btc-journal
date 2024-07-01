@@ -3,8 +3,9 @@
 class HomeController < ActionController::Base
   def index
     if current_user
-      redirect_to :dashboard
+      return redirect_to :dashboard
     end
     @prices = CurrentPrice.includes(:fiat_currency).all
+    render layout: 'application'
   end
 end

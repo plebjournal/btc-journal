@@ -1,18 +1,31 @@
-<h1>Pleb Journal</h1>
 
-<h3>Current Bitcoin Price</h3>
-<div>
-<ul>
+<div class="text-center">
+  <div class="row mb-5 mt-5">
+    <h1 class="display-1 mb-5">Pleb Journal</h1>
+  </div>
+</div>
+
+<div class="row mb-5">
+  <div class="col-12 col-md-6 col-lg-4 mx-auto">
+    <%= link_to 'Sign In', new_user_session_path, class: 'w-100 btn btn-lg btn-primary' %>
+  </div>
+</div>
+
+<div class="row mb-5">
+  <div class="col-12 col-md-6 col-lg-4 mx-auto">
+    <%= link_to 'Create Account', new_user_registration_path, class: 'w-100 btn btn-lg btn-primary' %>
+  </div>
+</div>
+
+<div class="text-center">
+  <div class="row mb-2 mt-5">
+    <h3 class="">Current Bitcoin Price</h3>
+  </div>
+</div>
+
+<div class="row text-center">
   <% @prices.each do |price| %>
-    <li> <%=price.price.round(0) %> <%= price.fiat_currency.code %></li>
+    <p class="fw-light"> <%= number_to_currency(price.price.round(0)) %> <%= price.fiat_currency.code %> </p>
   <% end %>
-</ul>
 </div>
 
-<div>
-  <%= link_to 'Sign In', new_user_session_path %>
-</div>
-
-<div>
-  <%= link_to 'Create Account', new_user_registration_path %>
-</div>

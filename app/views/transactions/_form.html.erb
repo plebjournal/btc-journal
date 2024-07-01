@@ -1,7 +1,7 @@
 <% local_now = current_user.local_time.strftime('%Y-%m-%dT%H:%M') %>
 
 <div class="row mt-3">
-  <div class="col-12 col-lg-6">
+  <div class="col-12 col-lg-6 mx-auto">
     <%= form_with(model: transaction) do |form| %>
       <div class="mb-3">
         <%= form.label :transaction_date, class: 'form-label fw-bold' %>
