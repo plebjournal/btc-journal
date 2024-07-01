@@ -20,7 +20,7 @@ class PriceRefresh::RefreshHistoricalPrices
 
   def refresh_history(fiat_currency)
     if blank_history_for?(fiat_currency)
-      Rails.Rails.logger.info "no existing prices found, updating full history for #{fiat_currency.code}"
+      Rails.logger.info "no existing prices found, updating full history for #{fiat_currency.code}"
       full_history(fiat_currency)
     else
       update_to_latest(fiat_currency)
@@ -34,9 +34,9 @@ class PriceRefresh::RefreshHistoricalPrices
   def full_history(fiat_currency)
     prices = fetch_ordered(fiat_currency, DateTime.now)
     while prices.first[:date] >= MIN_HISTORICAL_DATE && prices.first[:price] > 0.0
-      Rails.Rails.logger.info "inserting #{prices.length} historical prices"
+      Rails.logger.info "inserting #{prices.length} historical prices"
       HistoricalPrice.upsert_all(prices, unique_by: [:fiat_currency_id, :date])
-      Rails.Rails.logger.info 'done inserting prices'
+      Rails.logger.info 'done inserting prices'
       prices = fetch_ordered(fiat_currency, Time.at(prices.first[:date], in: 'UTC'))
     end
   end
