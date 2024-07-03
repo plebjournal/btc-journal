@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   resources :user_settings
   resources :transactions
+  resources :notes
+
   resource :import_transactions do
     get :index
     post :upload

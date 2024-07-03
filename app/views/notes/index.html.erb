@@ -1,0 +1,32 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Notes</h1>
+<div class="mb-5">
+  <%= link_to "New Note", new_note_path %>
+</div>
+
+<div id="notes" class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th><%= sort_link(@q, :created_at, default_order: :desc) %></th>
+        <th><%= sort_link(@q, :sentiment) %></th>
+        <th><%= sort_link(@q, :price) %></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @notes.each do |note| %>
+      <tr>
+        <td><%= note.created_at.strftime('%Y-%m-%d') %></td>
+        <td><%= note.sentiment %></td>
+        <td><%= number_to_currency(note.price) %></td>
+        <td>
+          <%= link_to 'Read', note_path(note) %>
+          <%= link_to 'Edit', edit_note_path(note) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+

@@ -3,13 +3,18 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :transactions, dependent: :destroy
+  has_many :transactions, dependent: :destroy, inverse_of: :user
+  has_many :notes, dependent: :destroy, inverse_of: :user
   has_one :user_setting, dependent: :destroy, inverse_of: :user
 
   after_create :create_user_setting
 
   def fiat_currency
     user_setting&.fiat_currency || FiatCurrency.first
+  end
+
+  def current_price
+    CurrentPrice.find_by(fiat_currency: fiat_currency)
   end
 
   def timezone

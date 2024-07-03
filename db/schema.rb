@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_21_233815) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_01_042108) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -41,6 +41,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_21_233815) do
     t.datetime "updated_at", null: false
     t.index ["fiat_currency_id", "date"], name: "index_historical_prices_on_fiat_currency_id_and_date", unique: true
     t.index ["fiat_currency_id"], name: "index_historical_prices_on_fiat_currency_id"
+  end
+
+  create_table "notes", force: :cascade do |t|
+    t.decimal "price", null: false
+    t.bigint "fiat_currency_id", null: false
+    t.text "body", null: false
+    t.integer "sentiment", default: 0, null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["fiat_currency_id"], name: "index_notes_on_fiat_currency_id"
+    t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -80,6 +92,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_21_233815) do
 
   add_foreign_key "current_prices", "fiat_currencies"
   add_foreign_key "historical_prices", "fiat_currencies"
+  add_foreign_key "notes", "fiat_currencies"
+  add_foreign_key "notes", "users"
   add_foreign_key "transactions", "fiat_currencies"
   add_foreign_key "transactions", "users"
   add_foreign_key "user_settings", "fiat_currencies"

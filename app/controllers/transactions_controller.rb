@@ -4,7 +4,7 @@ class TransactionsController < ApplicationController
 
   # GET /transactions or /transactions.json
   def index
-    @q = Transaction.includes(:fiat_currency).ransack(params[:q])
+    @q = current_user.transactions.includes(:fiat_currency).ransack(params[:q])
     @q.sorts = 'transaction_date desc' if @q.sorts.empty?
     @transactions = @q.result.page(params[:page])
   end
