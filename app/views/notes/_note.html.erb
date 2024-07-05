@@ -1,16 +1,23 @@
-<div class="row mb-3">
-  <div class="col-12 col-md-4">
-    <%= @note.created_at %>
+<% content_for :head do %>
+  <%= javascript_import_module_tag 'read_note' %>
+<% end %>
+
+<input class="d-none" value="<%= @note.body %>" id="note-content">
+<div class="card mb-5">
+  <div class="card-header">
+    <div class="float-start align-middle">
+      <span class="badge text-bg-primary me-2 fs-5"><%= @note.sentiment %></span>
+    </div>
+    <div class="float-end align-middle">
+      <%= created_at %> - <%= price %> <%= fiat_code %>
+    </div>
+
   </div>
-  <div class="col-12 col-md-4">
-    <%= @note.sentiment %>
-  </div>
-  <div class="col-12 col-md-4">
-    <%= @note.price %>
-  </div>
-</div>
-<div class="row mb-3">
-  <div class="col-12 col-md-6 mx-auto">
-    <%= @note.body %>
+  <div class="card-body">
+    <div class="row mb-3">
+      <div class="col-12 mx-auto">
+        <div id="editorjs"></div>
+      </div>
+    </div>
   </div>
 </div>

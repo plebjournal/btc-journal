@@ -1,12 +1,14 @@
 <% current_price = current_user.current_price.price.round(2) %>
-
+<% content_for :head do %>
+  <%= javascript_import_module_tag 'edit_note' %>
+<% end %>
 
 <div class="row mt-3">
   <div class="col-12 col-lg-6 mx-auto">
     <%= form_with(model: note) do |form| %>
       <div class="mb-3">
         <%= form.label :price, class: 'form-label' %>
-        <%= form.number_field :price, value: note.price || current_price, class: 'form-control', disabled: true %>
+        <%= form.number_field :price, value: note&.price&.round(2) || current_price, class: 'form-control', disabled: true %>
       </div>
 
       <div class="mb-3">
@@ -16,8 +18,10 @@
 
       <div class="mb-3">
         <%= form.label :body, class: 'form-label' %>
-        <%= form.text_area :body, value: note.body, class: 'form-control' %>
+        <%= form.hidden_field :body, value: note.body, class: 'form-control' %>
       </div>
+
+      <div id="editorjs"></div>
 
       <% if note.errors.any? %>
         <div style="color: red">
