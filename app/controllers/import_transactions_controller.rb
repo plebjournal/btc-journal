@@ -42,11 +42,15 @@ class ImportTransactionsController < ApplicationController
     Transaction.new(
       transaction_date: table_row['transaction_date'],
       btc: table_row['btc'],
-      fiat: table_row['fiat'],
+      fiat: parse_fiat_amount(table_row['fiat']),
       transaction_type: table_row['transaction_type']&.downcase,
       fiat_currency_id: parse_fiat(table_row['fiat_currency']),
       user_id: user_id
     )
+  end
+
+  def parse_fiat_amount(fiat)
+    fiat.blank? ? nil : fiat
   end
 
   def parse_fiat(fiat_code)

@@ -4,7 +4,7 @@ class Transaction < ApplicationRecord
 
   validates :transaction_date, presence: true
   validates :btc, presence: true, numericality: { greater_than_or_equal_to: 1 }
-  validates :fiat, numericality: { greater_than_or_equal_to: 0 } if present?
+  validate :validate_fiat
 
   enum transaction_type: {
     buy: 'buy',
@@ -31,5 +31,13 @@ class Transaction < ApplicationRecord
 
   def self.ransackable_attributes(auth_object = nil)
     ['transaction_date', 'btc', 'fiat', 'transaction_type']
+  end
+
+  private
+
+  def validate_fiat
+    if fiat.present? && fiat < 0
+      errors.add(:fiat, 'must be greater than or equal to 0')
+    end
   end
 end
