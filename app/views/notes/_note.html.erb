@@ -6,10 +6,11 @@
 <div class="card mb-5">
   <div class="card-header">
     <div class="float-start align-middle">
-      <span class="badge text-bg-primary me-2 fs-5"><%= @note.sentiment %></span>
+      <%= created_at %>
+
     </div>
     <div class="float-end align-middle">
-      <%= created_at %> - <%= price %> <%= fiat_code %>
+      <span class="badge text-bg-primary me-2"><%= @note.sentiment %></span> <span class="badge text-warning bg-dark"><%= price %> <%= fiat_code %></span>
     </div>
 
   </div>
