@@ -7,29 +7,67 @@
 
 <div class="text-center">
   <div class="row align-items-center mb-4 mt-4">
-    <h1>Dashboard</h1>
+    <h1 class="h2">Dashboard</h1>
+  </div>
+</div>
+<div class="row mb-4 d-md-none">
+  <div class="col-12 col-md-6 mb-3">
+    <%= link_to 'New Transaction', new_transaction_path, class: 'btn btn-primary btn-lg w-100' %>
+  </div>
+  <div class="col-12 col-md-6 mb-3">
+    <%= link_to 'New Note', new_note_path, class: 'btn btn-primary btn-lg w-100' %>
   </div>
 </div>
 
-<div class="text-center">
-  <div class="row align-items-center">
-    <div class="col-12 col-sm-3 ">
-      <p class="lead">Fiat Value: <strong class="fw-bold"><%= fiat_value %> <%= fiat_currency.code %></strong></p>
+<div class="row">
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">💵 Fiat Value</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text fs-3"><%= fiat_value %> <%= fiat_currency.code %></p>
+      </div>
     </div>
-    <div class="col-12 col-sm-3 ">
-      <p class="lead">Stack (BTC): <strong class="fw-bold"><%= @summary.btc %></strong></p>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
+    <div class="card">
+      <div class="card-header d-inline">
+        <h5 class="card-title"> ₿ Stack (BTC)</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text fs-3"><%= @summary.btc %></p>
+      </div>
     </div>
-    <div class="col-12 col-sm-3 ">
-      <p class="lead">Cost Basis: <strong class="fw-bold"><%= number_to_currency(@summary.fiat) %> <%= fiat_currency.code %></strong></p>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">💸 Cost Basis</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text fs-3"><%= number_to_currency(@summary.fiat) %> <%= fiat_code %> </p>
+      </div>
     </div>
-    <div class="col-12 col-sm-3">
-      <p class="lead">NgU: <strong class="fw-bold"><%= @summary.ngu.round(1) %>x <%= NumberGoUpPresenter.emoji(@summary.ngu.round(1)) %> </strong></p>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">📈 NgU</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text fs-3"><%= @summary.ngu.round(1) %>x <%= NumberGoUpPresenter.emoji(@summary.ngu.round(1)) %> </p>
+      </div>
     </div>
-    <div class="col-12 col-sm-3">
-      <p class="lead"> Current <%= fiat_currency.code %> Price:
-        <strong class="fw-bold">
-          <%= number_to_currency(current_price.price) %>
-        </strong></p>
+  </div>
+  <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center mb-3">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title">📆 Current Price</h5>
+      </div>
+      <div class="card-body">
+        <p class="card-text fs-4"> <%= number_to_currency(current_price.price) %> <%= fiat_code %></p>
+      </div>
     </div>
   </div>
 </div>
