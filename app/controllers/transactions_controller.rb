@@ -25,10 +25,7 @@ class TransactionsController < ApplicationController
 
   # POST /transactions or /transactions.json
   def create
-    @transaction = Transaction.new(transaction_params)
-    @transaction.user_id = current_user.id
-    @transaction.transaction_date = transaction_params[:transaction_date].in_time_zone(current_user.local_zone)
-
+    @transaction = Transaction.create_for_user(current_user, transaction_params)
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully created." }
@@ -43,7 +40,11 @@ class TransactionsController < ApplicationController
   # PATCH/PUT /transactions/1 or /transactions/1.json
   def update
     respond_to do |format|
-      if @transaction.update(transaction_params)
+      transaction_update = transaction_params
+      if transaction_update[:btc_unit] == 'BTC'
+        transaction_update[:btc] = transaction_update[:btc] * 100_000_000
+      end
+      if @transaction.update(transaction_update.except(:btc_unit))
         format.html { redirect_to transaction_url(@transaction), notice: "Transaction was successfully updated." }
         format.json { render :show, status: :ok, location: @transaction }
       else
@@ -75,6 +76,6 @@ class TransactionsController < ApplicationController
     end
 
     def required_params
-      [:transaction_date, :btc, :fiat, :transaction_type, :fiat_currency_id]
+      [:transaction_date, :btc, :btc_unit, :fiat, :transaction_type, :fiat_currency_id]
     end
 end

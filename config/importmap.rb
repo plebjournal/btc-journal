@@ -5,6 +5,7 @@ pin "edit_note"
 pin "read_note"
 pin "application"
 pin "charts"
+pin "transaction"
 pin "lightweight-charts" # @4.1.5
 pin "fancy-canvas" # @2.1.0
 pin "@editorjs/editorjs", to: "@editorjs--editorjs.js" # @2.29.0

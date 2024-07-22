@@ -17,6 +17,20 @@ class Transaction < ApplicationRecord
     user.transactions.includes(:fiat_currency)
   end
 
+  def self.create_for_user(user, params)
+    btc = params[:btc].to_d
+    if params[:btc_unit] == 'BTC'
+      btc *= 100_000_000
+    end
+    Transaction.new({
+      btc: btc,
+      fiat: params[:fiat],
+      fiat_currency_id: params[:fiat_currency_id],
+      user: user,
+      transaction_date: params[:transaction_date].in_time_zone(user.local_zone),
+    })
+  end
+
   def as_sats
     btc
   end

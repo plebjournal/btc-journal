@@ -1,8 +1,12 @@
+<% content_for :head do %>
+  <%= javascript_import_module_tag 'transaction' %>
+<% end %>
+
 <% local_now = current_user.local_time.strftime('%Y-%m-%dT%H:%M') %>
 
 <div class="row mt-3">
   <div class="col-12 col-lg-6 mx-auto">
-    <%= form_with(model: transaction) do |form| %>
+    <%= form_with(model: transaction, id: "transaction-form") do |form| %>
       <div class="mb-3">
         <%= form.label :transaction_date, class: 'form-label fw-bold' %>
         <%= form.datetime_field :transaction_date, value: transaction.transaction_date || local_now, class: 'form-control' %>
@@ -11,12 +15,24 @@
         <%= form.label :transaction_type, class: 'form-label fw-bold' %>
         <%= form.select :transaction_type, ['buy', 'sell'], { value: transaction.transaction_type }, { class: 'form-select' } %>
       </div>
-      <div class="mb-3">
-        <%= form.label :btc, 'Sats', class: 'form-label fw-bold' %>
-        <%= form.number_field :btc, { value: transaction.btc || 0, class: 'form-control'} %>
+
+      <div class="row mb-3">
+        <div class="fw-bold">Bitcoin</div>
+        <div class="col-md">
+          <div class="form-floating">
+            <%= form.number_field :btc, {  value: transaction.btc || 0, class: 'form-control', min: 0, step: 'any' } %>
+            <%= form.label :btc, 'Amount', class: 'form-label fw-bold' %>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="form-floating">
+            <%= form.select :btc_unit, ['Sats', 'BTC'], {}, { class: 'form-select' } %>
+            <%= form.label :btc_unit, 'Units', class: 'form-label fw-bold' %>
+          </div>
+        </div>
       </div>
       <div class="mb-3">
-        <%= form.label :fiat, 'Fiat', class: 'form-label fw-bold' %>
+        <%= form.label :fiat, 'Fiat', class: 'form-label fw-bold', min: 0 %>
         <%= form.number_field :fiat, value: transaction.fiat || 0, class: 'form-control' %>
       </div>
       <div class="mb-3">
@@ -27,7 +43,6 @@
       <% if transaction.errors.any? %>
         <div style="color: red">
           <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
-
           <ul>
             <% transaction.errors.each do |error| %>
               <li><%= error.full_message %></li>
