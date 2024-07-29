@@ -14,10 +14,23 @@ const oneYearDateRange = () => {
 }
 
 const initChart = async () => {
-  const chartOptions = { layout: { textColor: 'black', background: { type: 'solid', color: 'white' } } };
+  const chartOptions = {
+    layout: {
+      textColor: '#DDD',
+      background: {
+        type: 'solid',
+        color: '#222'
+      }
+    },
+    grid: {
+      vertLines: { color: '#444' },
+      horzLines: { color: '#444' },
+    },
+  };
   const chart = createChart(document.getElementById('chart-container'), chartOptions);
   const areaSeries = chart.addAreaSeries({
-    lineColor: '#2962FF', topColor: '#2962FF',
+    lineColor: '#2962FF',
+    topColor: '#2962FF',
     bottomColor: 'rgba(41, 98, 255, 0.28)',
   });
   const data = await loadData();

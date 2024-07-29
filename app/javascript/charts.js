@@ -32,12 +32,16 @@ const initValueAndStackChart = async () => {
       visible: true,
     },
     layout: {
-      textColor: 'black',
+      textColor: '#DDD',
       background: {
         type: 'solid',
-        color: 'white'
+        color: '#222'
       }
-    }
+    },
+    grid: {
+      vertLines: { color: '#444' },
+      horzLines: { color: '#444' },
+    },
   };
   const chart = createChart(document.getElementById('chart-container'), chartOptions);
   const areaSeries = chart.addAreaSeries({
@@ -72,12 +76,16 @@ const initCostBasisChart = async () => {
       visible: true,
     },
     layout: {
-      textColor: 'black',
+      textColor: '#DDD',
       background: {
         type: 'solid',
-        color: 'white'
+        color: '#222'
       }
-    }
+    },
+    grid: {
+      vertLines: { color: '#444' },
+      horzLines: { color: '#444' },
+    },
   };
   const chart = createChart(document.getElementById('cost-basis-chart-container'), chartOptions);
   const areaSeries = chart.addAreaSeries({
