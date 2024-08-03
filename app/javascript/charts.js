@@ -15,6 +15,11 @@ const loadCostBasis = async () => {
   return data.json();
 }
 
+const loadNgu = async () => {
+  const data = await fetch('/api/ngu');
+  return data.json();
+}
+
 const oneYearDateRange = () => {
   const currentDate = new Date()
   return {
@@ -110,5 +115,49 @@ const initCostBasisChart = async () => {
   chart.timeScale().setVisibleRange(oneYearDateRange());
 }
 
+const initNguChart = async () => {
+  const chartOptions = {
+    rightPriceScale: {
+      visible: true,
+    },
+    leftPriceScale: {
+      visible: true,
+    },
+    layout: {
+      textColor: '#DDD',
+      background: {
+        type: 'solid',
+        color: '#222'
+      }
+    },
+    grid: {
+      vertLines: { color: '#444' },
+      horzLines: { color: '#444' },
+    },
+  };
+  const chart = createChart(document.getElementById('ngu-chart-container'), chartOptions);
+  const areaSeries = chart.addAreaSeries({
+    priceScaleId: 'right',
+    lineColor: '#2962FF',
+    topColor: '#2962FF',
+    bottomColor: 'rgba(41, 98, 255, 0.28)',
+  });
+
+  const nguSeries = chart.addLineSeries({
+    priceScaleId: 'left',
+    color: '#FF2972',
+    lineWidth: 4,
+  });
+
+  const data = await loadFiatValue();
+  const ngu = await loadNgu();
+
+  areaSeries.setData(data);
+  nguSeries.setData(ngu);
+
+  chart.timeScale().setVisibleRange(oneYearDateRange());
+}
+
 initValueAndStackChart();
 initCostBasisChart();
+initNguChart();

@@ -24,5 +24,6 @@ Rails.application.routes.draw do
     get 'fiat-value' => 'fiat_value#index'
     get 'portfolio' => 'portfolio#index'
     get 'cost-basis' => 'cost_basis#index'
+    get 'ngu' => 'ngu#index'
   end
 end

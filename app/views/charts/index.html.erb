@@ -1,15 +1,18 @@
 <% content_for :head do %>
   <%= javascript_import_module_tag 'charts' %>
 <% end %>
-<h1>Charts</h1>
 
-<div class="row text-center mb-4">
-  <h3>BTC Stack and Value</h3>
+<div class="row text-center mb-4 mt-3">
+  <h3>Fiat Value and BTC Stack</h3>
 </div>
 <div id="chart-container" style="height: 400px; width: 100%" class="mb-5"></div>
 
 <div class="row text-center mb-4">
   <h3>Fiat Value and Cost Basis</h3>
 </div>
-<div id="cost-basis-chart-container" style="height: 400px; width: 100%"></div>
+<div id="cost-basis-chart-container" style="height: 400px; width: 100%" class="mb-5"></div>
 
+<div class="row text-center mb-4">
+  <h3>Fiat Value and NgU</h3>
+</div>
+<div id="ngu-chart-container" style="height: 400px; width: 100%" class="mb-5"></div>
