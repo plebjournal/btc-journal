@@ -50,6 +50,9 @@ gem 'httparty', '~> 0.22.0'
 gem 'kaminari'
 gem 'ransack'
 
+# Whenever is a Ruby gem that provides a clear syntax for writing and deploying cron jobs.
+gem 'whenever', require: false
+
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
