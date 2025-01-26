@@ -11,6 +11,9 @@ gem "sprockets-rails"
 # Use postgresql as the database for Active Record
 gem "pg", "~> 1.1"
 
+# Ruby library to interface with the SQLite3 database engine (http://www.sqlite.org). Precompiled binaries are available for common platforms for recent versions of Ruby.
+gem 'sqlite3', '~> 2.5'
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 

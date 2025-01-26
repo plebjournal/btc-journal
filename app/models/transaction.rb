@@ -6,12 +6,17 @@ class Transaction < ApplicationRecord
   validates :btc, presence: true, numericality: { greater_than_or_equal_to: 1 }
   validate :validate_fiat
 
-  enum transaction_type: {
-    buy: 'buy',
-    sell: 'sell',
-    income: 'income',
-    spend: 'spend'
-  }
+  validates :transaction_type, inclusion: { in: %w[buy sell income spend] }
+
+  def self.transaction_types
+    %w[buy sell income spend]
+  end
+
+  transaction_types.each do |type|
+    define_method("#{type}?") do
+      transaction_type == type
+    end
+  end
 
   def self.for_user(user)
     user.transactions.includes(:fiat_currency)
