@@ -8,9 +8,6 @@ gem "rails", "~> 7.1.3", ">= 7.1.3.2"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-# Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
-
 # Ruby library to interface with the SQLite3 database engine (http://www.sqlite.org). Precompiled binaries are available for common platforms for recent versions of Ruby.
 gem 'sqlite3', '~> 2.5'
 
