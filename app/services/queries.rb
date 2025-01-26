@@ -8,7 +8,7 @@ class Queries
     historical_prices =
       HistoricalPrice.where(date: start_date..end_date)
                      .where(fiat_currency: user.fiat_currency)
-                     .where('extract(hour from date) = 0')
+                     .where("strftime('%H', date) = '00'")
                      .order(:date).to_a
 
     sum = UserTransactionsMovingSum.for_user(user)
@@ -32,7 +32,7 @@ class Queries
     historical_prices =
       HistoricalPrice.where(date: start_date..end_date)
                      .where(fiat_currency: user.fiat_currency)
-                     .where('extract(hour from date) = 0')
+                     .where("strftime('%H', date) = '00'")
                      .order(:date).to_a
 
     sum = UserTransactionsMovingSum.for_user(user)
@@ -57,7 +57,7 @@ class Queries
     historical_prices =
       HistoricalPrice.where(date: start_date..end_date)
                      .where(fiat_currency: user.fiat_currency)
-                     .where('extract(hour from date) = 0')
+                     .where("strftime('%H', date) = '00'")
                      .order(:date).to_a
 
     sum = UserTransactionsMovingSum.for_user(user)
@@ -82,7 +82,7 @@ class Queries
     historical_prices =
       HistoricalPrice.where(date: start_date..end_date)
                      .where(fiat_currency: user.fiat_currency)
-                     .where('extract(hour from date) = 0')
+                     .where("strftime('%H', date) = '00'")
                      .order(:date).to_a
 
     sum = UserTransactionsMovingSum.for_user(user)
